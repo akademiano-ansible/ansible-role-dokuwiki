@@ -1,32 +1,33 @@
 ---
+
 - name: Install required packages
+  become: yes
   apt:
-    name: "{{ item }}"
-    state: present
-    install_recommends: false
-  with_items:
-    - ca-certificates
-    - openssl
-    - php5-gd
-    - php5-sqlite
-    - tar
-    - unzip
-    - zip
+    name: "{{dokuwiki_required_packages}}"
+    state: latest
+
 
 - name: Make sure Dokuwiki base directory exists (workaround for Ansible bug)
   file:
     path: "{{ dokuwiki_base }}"
     state: directory
 
+- name: Make sure dstr cache exist
+  file:
+    path: "{{dokuwiki_src_cache}}"
+    state: directory
+
+- get_url:
+    url: "{{ dokuwiki_source }}"
+    dest: "{{dokuwiki_src_cache}}/dokuwiki.tar.gz"
+    force: no
+
 - name: Download and extract latest version of Dokuwiki
   unarchive:
-    src: "{{ dokuwiki_url }}"
-    dest: "{{ dokuwiki_base }}"
-    remote_src: true
+    src: "{{dokuwiki_src_cache}}/dokuwiki.tar.gz"
+    dest: "{{dokuwiki_base}}"
+    remote_src: yes
     extra_opts: ['--strip-components=1']
     group: "{{ dokuwiki_group }}"
     owner: "{{ dokuwiki_user }}"
-    mode: "0750"
-  tags:
-    - upgrade
-
+    mode: u=rwX,g=rwX,o=

@@ -1,27 +1,126 @@
 ---
 # defaults file for PeterMosmans.dokuwiki
 
-dokuwiki_base: /var/www/html
+dokuwiki_title: "default Dokuwiki site"
+
+dokuwiki_user: root
 dokuwiki_group: www-data
 dokuwiki_name: dokuwiki
+
+dokuwiki_base: /var/www/dokuwiki
+dokuwiki_data: /var/lib/dokuwiki/data
+dokuwiki_conf: /var/lib/dokuwiki/conf
+dokuwiki_bin: /opt/dokuwiki/bin
+
 dokuwiki_plugins_remove:
   - name: authad
   - name: authldap
   - name: authmysql
   - name: authpdo
   - name: authpgsql
-  - name: info
-  - name: popularity
-dokuwiki_provision: false
-dokuwiki_savedir: /var/www/html/data
+
 dokuwiki_source: https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
-dokuwiki_user: root
+
+dokuwiki_src_cache: /var/cache/dokuwikisrc
 
 # Template parameters (will only be used when dokuwiki_provision is true)
 dokuwiki_acl_all: 0
 dokuwiki_acl_user: 8
-dokuwiki_disableactions: "register"
-dokuwiki_local:
-  - name: "['passcrypt']"
-    value: 'bcrypt'
-dokuwiki_title: "default Dokuwiki site"
+
+dokuwiki_disableactions: "register,profile_delete"
+
+dokuwiki_local: []
+
+dokuwiki_templates:
+  - name: sprintdoc
+    host: github.com
+    repo: cosmocode/dokuwiki-template-sprintdoc
+
+dokuwiki_template: sprintdoc
+
+dokuwiki_plugins:
+  - name: vshare
+    host: github.com
+    repo: splitbrain/dokuwiki-plugin-vshare
+
+  - name: move
+    host: github.com
+    repo: michitux/dokuwiki-plugin-move
+
+  - name: edittable
+    host: github.com
+    repo: cosmocode/edittable
+
+  - name: dw2pdf
+    host: github.com
+    repo: splitbrain/dokuwiki-plugin-dw2pdf
+
+  - name: templatepagename
+    host: github.com
+    repo: Klap-in/dokuwiki-plugin-templatepagename
+
+  - name: addnewpage
+    host: github.com
+    repo: samwilson/dokuwiki-plugin-addnewpage
+
+  - name: newpagetemplate    
+    host: github.com
+    repo: turnermm/newpagetemplate
+
+  - name: sqlite
+    host: github.com
+    repo: cosmocode/sqlite
+
+  - name: struct
+    host: github.com
+    repo: cosmocode/dokuwiki-plugin-struct
+
+  - name: bureaucracy
+    host: github.com
+    repo: splitbrain/dokuwiki-plugin-bureaucracy
+
+  - name: cloud
+    host: github.com
+    repo: dokufreaks/plugin-cloud    
+
+  - name: tag
+    host: github.com
+    repo: dokufreaks/plugin-tag
+
+  - name: nspages
+    host: github.com
+    repo: gturri/nspages
+
+  - name: imgpaste
+    host: github.com
+    repo: cosmocode/dokuwiki-plugin-imgpaste
+
+  - name: note
+    host: github.com
+    repo: LarsGit223/dokuwiki_note
+
+  - name: pagelist
+    host: github.com
+    repo: dokufreaks/plugin-pagelist
+
+  - name: codebutton
+    host: github.com
+    repo: casperklein/dokuwiki_plugin_codebutton
+
+  - name: flowchartjs 
+    host: github.com
+    repo: ghbore/flowchartjs
+
+  - name: gchart
+    host: github.com
+    repo: splitbrain/dokuwiki-plugin-gchart
+
+  - name: include
+    host: github.com
+    repo: dokufreaks/plugin-include
+
+
+
+
+
+

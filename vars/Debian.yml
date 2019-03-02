@@ -1,2 +1,9 @@
 ---
 # vars file for PeterMosmans.dokuwiki
+dokuwiki_required_packages:
+  - ca-certificates
+  - openssl
+  - tar
+  - unzip
+  - zip
+

@@ -1,0 +1,71 @@
+- debug:
+    msg: "Prepare [{{part.name}}] part..."
+
+- name: Remove (previous versions of) part
+  file:
+    path: "{{parts_path}}/{{part.name}}"
+    state: absent
+
+- name: Get info about latest part release
+  uri:
+    url: "https://api.github.com/repos/{{part.repo}}/releases/latest"
+    return_content: true
+  register: release_response
+  ignore_errors: yes
+
+- set_fact:
+    part_url: "{{ release_response.json.tarball_url }}"
+  when: release_response.status == 200
+
+- name: Get link to master branch src
+  uri:
+    url: "https://api.github.com/repos/{{part.repo}}/tarball/master"
+    return_content: false
+    follow_redirects: none
+    status_code:
+      - 301
+      - 302
+  register: src_response
+  when: release_response.status != 200
+
+#- debug:
+#    msg: "{{ src_response }}"
+#  when: release_response.status != 200 and src_response is defined
+
+- set_fact:
+    part_url: "{{ src_response.location }}"
+  when: release_response.status != 200 and src_response is defined
+
+- debug:
+    msg: "Download [{{part.name}}] from {{part_url}}"
+
+- get_url:
+    url: "{{part_url}}"
+    dest: "{{parts_path}}/{{part.name}}.tar.gz"
+
+- unarchive:
+    src: "{{parts_path}}/{{part.name}}.tar.gz"
+    dest: "{{parts_path}}"
+    remote_src: yes
+
+- shell: "ls -d */ | cut -f1 -d'/' | grep {{part.name}}"
+  args:
+    executable: /bin/bash
+    chdir: "{{parts_path}}"
+  register: part_dir
+
+#- debug:
+#    msg: "{{part_dir}}"
+
+- shell: "mv {{parts_path}}/{{part_dir.stdout}} {{parts_path}}/{{part.name}}"
+  args:
+    executable: /bin/bash
+    chdir: "{{parts_path}}"
+
+- file:
+    path: "{{parts_path}}/{{part.name}}.tar.gz"
+    state: absent
+
+- debug:
+    msg: "Install [{{part.name}}] done!"
+
