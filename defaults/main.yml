@@ -95,10 +95,6 @@ dokuwiki_plugins:
     host: github.com
     repo: cosmocode/dokuwiki-plugin-imgpaste
 
-  - name: note
-    host: github.com
-    repo: LarsGit223/dokuwiki_note
-
   - name: pagelist
     host: github.com
     repo: dokufreaks/plugin-pagelist
@@ -119,6 +115,25 @@ dokuwiki_plugins:
     host: github.com
     repo: dokufreaks/plugin-include
 
+  - name: wrap
+    host: github.com
+    repo: selfthinker/dokuwiki_plugin_wrap
+
+  - name: qna
+    host: github.com
+    repo: dwp-forge/qna
+
+  - name: icons
+    host: github.com
+    repo: LotarProject/dokuwiki-plugin-icons
+
+  - name: graphviz
+    host: github.com
+    repo: splitbrain/dokuwiki-plugin-graphviz
+
+  - name: data
+    host: github.com
+    repo: splitbrain/dokuwiki-plugin-data
 
 
 
