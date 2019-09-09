@@ -28,7 +28,7 @@ dokuwiki_acl_all: 0
 dokuwiki_acl_user: 8
 
 dokuwiki_disableactions: "register,profile_delete"
-
+dokuwiki_lang: en
 dokuwiki_local: []
 
 dokuwiki_templates:

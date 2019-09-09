@@ -8,13 +8,13 @@ $conf['savedir'] = '{{dokuwiki_data}}';
 {% if dokuwiki_template is defined %}
 $conf['template'] = '{{ dokuwiki_template}}';
 {% endif %}
-$conf['lang'] = 'ru';
+$conf['lang'] = '{{ dokuwiki_lang }}';
 $conf['useacl'] = 1;
 $conf['superuser'] = '@admin';
 $conf['disableactions'] = '{{ dokuwiki_disableactions }}';
 $conf['passcrypt'] = 'bcrypt';
 
-$conf['lang'] = 'ru';
+
 $conf['license'] = '0';
 $conf['breadcrumbs'] = 0;
 $conf['youarehere'] = 1;
